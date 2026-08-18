@@ -14,6 +14,10 @@
   <style>
     .source-list{display:grid;gap:8px;margin:12px 0}.source-row{display:flex;align-items:center;justify-content:space-between;gap:12px;border:1px solid var(--line);border-radius:6px;padding:9px 10px;background:#fcfdfd}.source-row b,.source-row small{display:block}.source-row small{color:var(--muted);font-size:11px;margin-top:2px}.source-row+.source-row{margin-top:0}.notice{font-size:12px;line-height:1.5;color:var(--amber);background:var(--amber-soft);border:1px solid #efd6a6;border-radius:6px;padding:9px 10px;margin:10px 0 18px}.evidence-title{font-size:14px;margin:18px 0 4px;border-top:1px solid var(--line);padding-top:15px}.review-status{margin-top:12px;border:1px solid #b8d8ce;border-radius:6px;background:#eef9f5;color:#176a63;padding:10px 12px;font-size:12px;line-height:1.5}.fact-item{border-left:3px solid #22936f}.unknown-item{border-left:3px solid var(--amber)}.file-picker{cursor:pointer;display:inline-block}button:disabled{cursor:not-allowed;opacity:.7}
   </style>
+  <style>
+    .flow-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:0 0 14px}.flow-step{border:1px solid var(--line);background:#fff;color:var(--muted);border-radius:7px;padding:10px 12px;text-align:left;display:grid;grid-template-columns:30px 1fr;column-gap:9px;align-items:center}.flow-step span{grid-row:span 2;color:var(--teal);font-weight:800;font-size:12px}.flow-step b{font-size:13px;color:var(--ink)}.flow-step small{font-size:11px}.flow-step.active{border-color:#79bfb4;background:var(--teal-soft)}.flow-note{margin:0 0 18px;color:var(--muted);font-size:12px}.answer.refusal{border-left-color:var(--amber)}.empty{padding:20px;text-align:center;color:var(--muted);border:1px dashed var(--line);border-radius:6px}@media(max-width:480px){.flow-step{grid-template-columns:24px 1fr;padding:9px 8px}.flow-step small{display:none}.flow-step b{font-size:12px}}
+  </style>
+  <link rel="icon" href="data:,">
 </head>
 <body>
 <div class="shell">
@@ -32,9 +36,55 @@
   function show(name){allTabs.forEach(x=>x.classList.toggle('active',x.dataset.tab===name));views.forEach(x=>x.classList.toggle('active',x.id===name));crumb.textContent=labels[name]}
   allTabs.forEach(x=>x.addEventListener('click',()=>show(x.dataset.tab)));
   document.querySelector('#ask').addEventListener('click',()=>{document.querySelector('#qaResult').innerHTML='<strong>已从有效资料检索到 2 条直接证据。</strong><div class="helper">回答保留版本、章节和原文定位，请核对右侧证据后使用。</div>'});
-  document.querySelector('#extract').addEventListener('click',e=>{e.textContent='已抽取 revision 01';e.disabled=true});
+  document.querySelector('#extract').addEventListener('click',event=>{const button=event.currentTarget;button.textContent='已抽取 revision 01';button.disabled=true});
   document.querySelector('#uploadInput').addEventListener('change',e=>{const file=e.target.files?.[0];if(file) document.querySelector('#uploadStatus').textContent=`已选择：${file.name}（仅演示，尚未入库）`});
-  document.querySelector('#review').addEventListener('click',e=>{e.textContent='已标记 · 待人工审核';e.disabled=true;document.querySelector('#reviewStatus').textContent='当前状态：REQUIRES_HUMAN_REVIEW（已提交本页演示状态）。下一步：由人工核对右侧技术事实和待确认项。'});
+  document.querySelector('#review').addEventListener('click',event=>{const button=event.currentTarget;button.textContent='已标记 · 待人工审核';button.disabled=true;document.querySelector('#reviewStatus').textContent='当前状态：REQUIRES_HUMAN_REVIEW（已提交本页演示状态）。下一步：由人工核对右侧技术事实和待确认项。'});
   document.querySelector('#copy').addEventListener('click',()=>{const status=document.querySelector('#copyStatus');const text=document.querySelector('#draftText').innerText; if(navigator.clipboard){navigator.clipboard.writeText(text).then(()=>status.textContent='草稿已复制到剪贴板。').catch(()=>status.textContent='浏览器未允许复制，请手动选中草稿。')}else{status.textContent='当前浏览器不支持自动复制，请手动选中草稿。'}});
+</script>
+<script>
+(() => {
+  const status = document.querySelector('.status');
+  if (status && status.lastChild) status.lastChild.textContent = '公开演示模式';
+  const descriptions = { qa: '输入：已登记且有效的技术资料 · 输出：带版本和出处的回答', req: '输入：客户咨询原文 · 输出：结构化字段、缺失项和风险', draft: '输入：技术证据 + 需求抽取 · 输出：待人工审核的回复初稿' };
+  Object.entries(descriptions).forEach(([id, text]) => { const sub = document.querySelector(`#${id} .sub`); if (sub) sub.textContent = text; });
+  const tabs = document.querySelector('.tabs');
+  if (tabs) {
+    const flow = document.createElement('div');
+    flow.className = 'flow-strip';
+    flow.setAttribute('aria-label', '三步工作流');
+    flow.innerHTML = '<button class="flow-step active" data-tab="qa"><span>01</span><b>资料问答</b><small>从已登记资料找证据</small></button><button class="flow-step" data-tab="req"><span>02</span><b>客户需求</b><small>把客户原文整理成字段</small></button><button class="flow-step" data-tab="draft"><span>03</span><b>回复草稿</b><small>合并证据并提交人工审核</small></button>';
+    tabs.before(flow);
+    const note = document.createElement('p');
+    note.className = 'flow-note';
+    note.textContent = '使用顺序：先查技术事实，再整理客户需求，最后生成待审核回复。当前公开页的资料为演示数据。';
+    flow.after(note);
+    flow.addEventListener('click', (event) => {
+      const button = event.target.closest('[data-tab]');
+      if (!button) return;
+      const tab = document.querySelector(`.tab[data-tab="${button.dataset.tab}"]`);
+      if (tab) tab.click();
+      flow.querySelectorAll('.flow-step').forEach((item) => item.classList.toggle('active', item === button));
+    });
+  }
+  const qaResult = document.querySelector('#qaResult');
+  const evidence = document.querySelector('#evidence');
+  const defaultEvidence = evidence ? evidence.innerHTML : '';
+  document.querySelector('#ask')?.addEventListener('click', () => {
+    const query = (document.querySelector('#q')?.value || '').trim();
+    const supported = /FIC-WPU-210/i.test(query) && /(固含量|储存|温度|物性)/.test(query);
+    if (supported) {
+      qaResult.className = 'answer';
+      qaResult.innerHTML = '<strong>固含量为 35 ± 2%，推荐储存温度为 5–35 °C。</strong><div class="helper">基于 2 条技术事实 · 版本 FIC-WPU-210 v1.0</div>';
+      if (evidence) evidence.innerHTML = defaultEvidence;
+    } else {
+      const selected = (document.querySelector('#uploadStatus')?.textContent || '').startsWith('已选择');
+      qaResult.className = 'answer refusal';
+      qaResult.innerHTML = `<strong>无法依据当前已登记资料回答。</strong><div class="helper">${selected ? '你选择的文件目前只显示文件名，尚未解析或入库。' : '当前演示知识库仅登记 FIC-WPU-210 资料。'} 请先完成真实资料入库，或换一个有对应技术证据的问题。</div>`;
+      if (evidence) evidence.innerHTML = '<div class="empty">未找到可支持本问题的证据，系统拒答。</div>';
+    }
+  });
+  document.querySelector('#extract')?.addEventListener('click', (event) => { const button = event.currentTarget; button.textContent = '已抽取 revision 01'; button.disabled = true; });
+  document.querySelector('#review')?.addEventListener('click', (event) => { const button = event.currentTarget; button.textContent = '已标记 · 待人工审核'; button.disabled = true; const state = document.querySelector('#reviewStatus'); if (state) state.textContent = '当前状态：REQUIRES_HUMAN_REVIEW（已提交本页演示状态）。下一步：由人工核对右侧技术事实和待确认项。'; });
+})();
 </script>
 </body></html>
