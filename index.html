@@ -15,7 +15,7 @@
     .source-list{display:grid;gap:8px;margin:12px 0}.source-row{display:flex;align-items:center;justify-content:space-between;gap:12px;border:1px solid var(--line);border-radius:6px;padding:9px 10px;background:#fcfdfd}.source-row b,.source-row small{display:block}.source-row small{color:var(--muted);font-size:11px;margin-top:2px}.source-row+.source-row{margin-top:0}.notice{font-size:12px;line-height:1.5;color:var(--amber);background:var(--amber-soft);border:1px solid #efd6a6;border-radius:6px;padding:9px 10px;margin:10px 0 18px}.evidence-title{font-size:14px;margin:18px 0 4px;border-top:1px solid var(--line);padding-top:15px}.review-status{margin-top:12px;border:1px solid #b8d8ce;border-radius:6px;background:#eef9f5;color:#176a63;padding:10px 12px;font-size:12px;line-height:1.5}.fact-item{border-left:3px solid #22936f}.unknown-item{border-left:3px solid var(--amber)}.file-picker{cursor:pointer;display:inline-block}button:disabled{cursor:not-allowed;opacity:.7}
   </style>
   <style>
-    .flow-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:0 0 14px}.flow-step{border:1px solid var(--line);background:#fff;color:var(--muted);border-radius:7px;padding:10px 12px;text-align:left;display:grid;grid-template-columns:30px 1fr;column-gap:9px;align-items:center}.flow-step span{grid-row:span 2;color:var(--teal);font-weight:800;font-size:12px}.flow-step b{font-size:13px;color:var(--ink)}.flow-step small{font-size:11px}.flow-step.active{border-color:#79bfb4;background:var(--teal-soft)}.flow-note{margin:0 0 18px;color:var(--muted);font-size:12px}.answer.refusal{border-left-color:var(--amber)}.empty{padding:20px;text-align:center;color:var(--muted);border:1px dashed var(--line);border-radius:6px}@media(max-width:480px){.flow-step{grid-template-columns:24px 1fr;padding:9px 8px}.flow-step small{display:none}.flow-step b{font-size:12px}}
+    .flow-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:0 0 14px}.flow-step{min-width:0;border:1px solid var(--line);background:#fff;color:var(--muted);border-radius:7px;padding:10px 12px;text-align:left;display:grid;grid-template-columns:30px 1fr;column-gap:9px;align-items:center}.flow-step span{grid-row:span 2;color:var(--teal);font-weight:800;font-size:12px}.flow-step b{font-size:13px;color:var(--ink)}.flow-step small{font-size:11px}.flow-step.active{border-color:#79bfb4;background:var(--teal-soft)}.flow-note{margin:0 0 18px;color:var(--muted);font-size:12px}.answer.refusal{border-left-color:var(--amber)}.empty{padding:20px;text-align:center;color:var(--muted);border:1px dashed var(--line);border-radius:6px}.source-row,.evidence-item,.evidence-item header,.source-row small{min-width:0;overflow-wrap:anywhere;word-break:break-word}@media(max-width:480px){.flow-step{grid-template-columns:24px 1fr;padding:9px 8px}.flow-step small{display:none}.flow-step b{font-size:12px}}
   </style>
   <link rel="icon" href="data:,">
 </head>
@@ -23,9 +23,9 @@
 <div class="shell">
   <aside class="rail"><div class="brand"><div class="mark">M</div><div><strong>Material Desk</strong><span>工业材料技术支持</span></div></div><nav class="nav"><button class="active" data-tab="qa">技术问答</button><button data-tab="req">客户需求</button><button data-tab="draft">回复初稿</button></nav><div class="rail-foot">演示空间 · Fictional demo corpus<br>所有输出需人工审核</div></aside>
   <main class="main"><header class="top"><div class="crumb">工作台 / <b id="crumb">技术问答</b></div><div class="status"><i class="dot"></i>本地演示模式</div></header><section class="content">
-    <div class="headline"><div><h1>技术支持工作台</h1><p>从企业资料、客户原文到可审核的回复初稿</p></div><div class="badge">合成资料 · 不连接外部服务</div></div>
+    <div class="headline"><div><h1>技术支持工作台</h1><p>从企业资料、客户原文到可审核的回复初稿</p></div><div id="modeBadge" class="badge">合成资料 · 不连接外部服务</div></div>
     <div class="tabs"><button class="tab active" data-tab="qa">资料问答</button><button class="tab" data-tab="req">需求抽取</button><button class="tab" data-tab="draft">回复草稿</button></div>
-    <div id="qa" class="view active"><div class="grid"><div class="panel"><h2>向技术资料提问</h2><div class="sub">仅检索已登记且有效的演示资料，回答带可核验出处</div><textarea id="q" class="textarea">FIC-WPU-210 的固含量和推荐储存温度是多少？</textarea><div class="actions"><button class="primary" id="ask">检索并回答</button><span class="helper">证据不足时会拒答</span></div><div id="qaResult" class="answer"><strong>固含量为 35 ± 2%，推荐储存温度为 5–35 °C。</strong><div class="helper">基于 2 条技术事实 · 版本 FIC-WPU-210 v1.0</div></div></div><div class="panel"><h2>当前已登记资料</h2><div class="sub">以下是本地演示资料；页面可以选择文件，但尚未解析或写入知识库。</div><div class="source-list"><div class="source-row"><span><b>FIC-WPU-210 数据表</b><small>PDF · v1.0 · 有效</small></span><span class="pill">已登记</span></div><div class="source-row"><span><b>FIC-WPU-210 储存说明</b><small>DOCX · v1.0 · 有效</small></span><span class="pill">已登记</span></div></div><div class="actions"><label class="secondary file-picker" for="uploadInput">选择资料（演示）</label><input id="uploadInput" type="file" accept=".pdf,.docx,.md,.txt" hidden><span id="uploadStatus" class="helper" role="status" aria-live="polite">支持 PDF、DOCX、MD、TXT</span></div><div class="notice">选择文件只会在本页显示文件名，不会上传、解析、建索引或发送到外部服务。真实入库功能尚未接入。</div><h2 class="evidence-title">本次技术证据</h2><div class="sub">查看回答依据的章节和原文片段</div><div id="evidence" class="evidence"><article class="evidence-item"><header><span>fic_wpu_210_datasheet.pdf · v1.0</span><span class="pill">DIRECT</span></header><div>章节 3 · 物性指标 · “<mark>固含量：35 ± 2%</mark>”</div></article><article class="evidence-item"><header><span>fic_wpu_210_datasheet.docx · v1.0</span><span class="pill">EXACT_MATCH</span></header><div>章节 5 · 储存与运输 · “<mark>建议在 5–35 °C 条件下储存</mark>”</div></article></div><div class="footer-note">文档版本、章节和原文片段均来自项目内合成资料。</div></div></div></div>
+    <div id="qa" class="view active"><div class="grid"><div class="panel"><h2>向技术资料提问</h2><div class="sub">仅检索已登记且有效的资料，回答带可核验出处</div><textarea id="q" class="textarea">FIC-WPU-210 的固含量和推荐储存温度是多少？</textarea><div class="actions"><button class="primary" id="ask">检索并回答</button><span class="helper">证据不足时会拒答</span></div><div id="qaResult" class="answer"><strong>固含量为 35 ± 2%，推荐储存温度为 5–35 °C。</strong><div class="helper">基于 2 条技术事实 · 版本 FIC-WPU-210 v1.0</div></div></div><div class="panel"><h2>当前已登记资料</h2><div class="sub">本地服务会解析并索引上传文件；公开静态站点不会接收文件。</div><div id="sourceList" class="source-list"><div class="source-row"><span><b>FIC-WPU-210 数据表</b><small>PDF · v1.0 · 有效</small></span><span class="pill">已登记</span></div><div class="source-row"><span><b>FIC-WPU-210 储存说明</b><small>DOCX · v1.0 · 有效</small></span><span class="pill">已登记</span></div></div><div class="actions"><label class="secondary file-picker" for="uploadInput">上传并入库</label><input id="uploadInput" type="file" accept=".pdf,.docx,.md,.txt" hidden><span id="uploadStatus" class="helper" role="status" aria-live="polite">支持 PDF、DOCX、MD、TXT</span></div><div class="notice">本地模式：文件会保存到项目内 work/local_kb，解析后建立 FTS5 索引；公开链接仍是静态演示，不会上传文件。</div><h2 class="evidence-title">本次技术证据</h2><div class="sub">查看回答依据的章节和原文片段</div><div id="evidence" class="evidence"><article class="evidence-item"><header><span>fic_wpu_210_datasheet.pdf · v1.0</span><span class="pill">DIRECT</span></header><div>章节 3 · 物性指标 · “<mark>固含量：35 ± 2%</mark>”</div></article><article class="evidence-item"><header><span>fic_wpu_210_datasheet.docx · v1.0</span><span class="pill">EXACT_MATCH</span></header><div>章节 5 · 储存与运输 · “<mark>建议在 5–35 °C 条件下储存</mark>”</div></article></div><div class="footer-note">本地上传资料会显示文件版本、定位和原文片段；演示资料为项目内合成内容。</div></div></div></div>
     <div id="req" class="view"><div class="grid"><div class="panel"><h2>粘贴客户咨询</h2><div class="sub">保留客户原文，抽取结果标注来源和缺失项</div><textarea id="msg" class="textarea">我们计划将水性聚氨酯用于木器涂层，月用量约 2 吨，希望 9 月交付。需要耐磨和阻燃性能，预算待确认。</textarea><div class="actions"><button class="primary" id="extract">结构化抽取</button><span class="helper">不会猜测原文未提供的字段</span></div></div><div class="panel"><h2>需求摘要</h2><div class="sub">revision 01 · 客户原文可回溯</div><div class="facts"><div class="fact"><label>应用场景</label><b>木器涂层</b></div><div class="fact"><label>材料 / 产品</label><b>水性聚氨酯</b></div><div class="fact"><label>数量</label><b>约 2 t / 月</b></div><div class="fact"><label>交期</label><b>2026-09</b></div><div class="fact"><label>性能指标</label><b>耐磨、阻燃</b></div><div class="fact"><label>预算</label><b>未知</b></div></div><div class="review"><b>待确认</b><br>阻燃等级、测试方法、交付日期和预算区间尚未提供。</div></div></div></div>
     <div id="draft" class="view"><div class="grid"><div class="panel"><h2>证据型回复初稿</h2><div class="sub">事实、假设和未知分离；发送前必须人工审核</div><div class="draft" id="draftText">您好，感谢您咨询木器涂层用水性聚氨酯。根据 FIC-WPU-210 v1.0 技术资料，产品固含量为 35 ± 2%，建议在 5–35 °C 条件下储存。<br><br>关于耐磨和阻燃性能，当前资料未提供与您测试方法对应的完整数据，因此暂不作适配或等级承诺。为便于评估，请确认阻燃等级/测试标准、目标耐磨指标、预计交付日期和预算区间。</div><div class="actions"><button class="primary" id="review">标记为待审核</button><button class="secondary" id="copy">复制草稿</button></div><div id="reviewStatus" class="review-status" role="status" aria-live="polite">当前状态：尚未提交审核。点击按钮后只更新本页演示状态，不会发送或保存到后台。</div><div id="copyStatus" class="helper" role="status" aria-live="polite"></div></div><div class="panel"><h2>审核状态</h2><div class="sub">草稿 hash: demo-7e31 · revision 01</div><div class="review"><b>REQUIRES_HUMAN_REVIEW</b><br>系统不会自动发送、报价、承诺交期或写入 CRM。</div><h3 class="evidence-title">技术事实（可以引用的证据）</h3><div class="evidence"><article class="evidence-item fact-item"><header><span>FACT · 技术资料</span><span class="pill">已绑定</span></header><div>固含量 35 ± 2% · PDF p.3 / DOCX §5</div></article></div><h3 class="evidence-title">未知 / 待确认（不能直接承诺）</h3><div class="evidence"><article class="evidence-item unknown-item"><header><span>UNKNOWN · 客户待补</span><span class="pill warn">待确认</span></header><div>阻燃等级、测试标准、预算和交付日</div></article></div></div></div></div>
     <div class="footer-note">当前页面是本地演示入口，使用项目内虚构资料；完整 C-H API、SQLite 编排、正式评测与生产部署尚未宣称完成。</div>
@@ -85,6 +85,109 @@
   });
   document.querySelector('#extract')?.addEventListener('click', (event) => { const button = event.currentTarget; button.textContent = '已抽取 revision 01'; button.disabled = true; });
   document.querySelector('#review')?.addEventListener('click', (event) => { const button = event.currentTarget; button.textContent = '已标记 · 待人工审核'; button.disabled = true; const state = document.querySelector('#reviewStatus'); if (state) state.textContent = '当前状态：REQUIRES_HUMAN_REVIEW（已提交本页演示状态）。下一步：由人工核对右侧技术事实和待确认项。'; });
+})();
+</script>
+<script>
+(() => {
+  const apiStatus = document.querySelector('.status');
+  const modeBadge = document.querySelector('#modeBadge');
+  const upload = document.querySelector('#uploadInput');
+  const uploadStatus = document.querySelector('#uploadStatus');
+  const sourceList = document.querySelector('#sourceList');
+  const ask = document.querySelector('#ask');
+  const question = document.querySelector('#q');
+  const qaResult = document.querySelector('#qaResult');
+  const evidence = document.querySelector('#evidence');
+  let localApi = false;
+  const escapeHtml = (value) => String(value ?? '').replace(/[&<>"']/g, (character) => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[character]));
+  const setMode = (text) => { if (apiStatus && apiStatus.lastChild) apiStatus.lastChild.textContent = text; };
+  const reasonText = (reason) => ({
+    NO_REGISTERED_DOCUMENTS: '当前知识库没有已入库资料。',
+    INSUFFICIENT_EVIDENCE: '当前已入库资料没有足够证据支持这个问题。',
+    NO_ACTIVE_SOURCE_VERSION: '匹配到的资料版本当前不可用。',
+  }[reason] || '当前已入库资料无法支持这个问题。');
+  const addDocumentRow = (item) => {
+    if (!sourceList || sourceList.querySelector(`[data-source-hash="${item.source_sha256}"]`)) return;
+    const row = window.document.createElement('div');
+    row.className = 'source-row';
+    row.dataset.sourceHash = item.source_sha256;
+    row.innerHTML = `<span><b>${escapeHtml(item.filename)}</b><small>${escapeHtml(item.document_format)} · ${escapeHtml(item.version_label)} · ${item.block_count} 个片段</small></span><span class="pill">已入库</span>`;
+    sourceList.appendChild(row);
+  };
+  const renderEvidence = (items) => {
+    if (!evidence) return;
+    if (!items.length) {
+      evidence.innerHTML = '<div class="empty">未找到可支持本问题的证据，系统拒答。</div>';
+      return;
+    }
+    evidence.innerHTML = items.map((item) => `<article class="evidence-item"><header><span>${escapeHtml(item.filename)} · ${escapeHtml(item.version)} · ${escapeHtml(item.location)}</span><span class="pill">${escapeHtml(item.verification)}</span></header><div>“<mark>${escapeHtml(item.quote)}</mark>”</div><small class="helper">source ${escapeHtml(item.source_sha256)}</small></article>`).join('');
+  };
+  const renderQuery = (result) => {
+    if (!qaResult) return;
+    if (result.status === 'ANSWERED') {
+      qaResult.className = 'answer';
+      qaResult.innerHTML = `<strong>${escapeHtml(result.answer)}</strong><div class="helper">本地 FTS5 检索 · 已返回 ${result.evidence.length} 条可核验证据</div>`;
+    } else {
+      qaResult.className = 'answer refusal';
+      qaResult.innerHTML = `<strong>无法依据当前已登记资料回答。</strong><div class="helper">${escapeHtml(reasonText(result.reason))} 请补充资料或换一个有证据的问题。</div>`;
+    }
+    renderEvidence(result.evidence || []);
+  };
+  fetch('/api/health', { cache: 'no-store' }).then((response) => {
+    if (!response.ok) throw new Error('LOCAL_API_UNAVAILABLE');
+    return response.json();
+  }).then(async (health) => {
+    localApi = health.mode === 'local';
+    setMode(`本地服务 · 已连接 · ${health.documents} 份资料`);
+    if (modeBadge) modeBadge.textContent = '本地资料 · 不连接外部服务';
+    const response = await fetch('/api/documents', { cache: 'no-store' });
+    if (response.ok) {
+      const payload = await response.json();
+      (payload.documents || []).forEach(addDocumentRow);
+    }
+  }).catch(() => {
+    localApi = false;
+    setMode('公开静态演示 · 未连接本地服务');
+    if (modeBadge) modeBadge.textContent = '合成资料 · 静态演示';
+  });
+  upload?.addEventListener('change', async (event) => {
+    const file = event.target.files?.[0];
+    if (!file) return;
+    if (!localApi) {
+      uploadStatus.textContent = `已选择：${file.name}（公开站点未连接本地入库服务）`;
+      return;
+    }
+    uploadStatus.textContent = `正在解析并入库：${file.name}`;
+    try {
+      const response = await fetch(`/api/documents?filename=${encodeURIComponent(file.name)}`, { method: 'POST', body: file, cache: 'no-store' });
+      const payload = await response.json();
+      if (!response.ok) throw new Error(payload.error || 'INGESTION_FAILED');
+      addDocumentRow(payload.document);
+      uploadStatus.textContent = `已入库：${payload.document.filename} · ${payload.document.block_count} 个可检索片段`;
+    } catch (error) {
+      uploadStatus.textContent = `入库失败：${error.message || 'INGESTION_FAILED'}`;
+    } finally {
+      event.target.value = '';
+    }
+  });
+  ask?.addEventListener('click', async () => {
+    if (!localApi) return;
+    const buttonText = ask.textContent;
+    ask.disabled = true;
+    ask.textContent = '检索中…';
+    try {
+      const response = await fetch('/api/query', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ question: question.value }), cache: 'no-store' });
+      const payload = await response.json();
+      if (!response.ok) throw new Error(payload.error || 'QUERY_FAILED');
+      renderQuery(payload);
+    } catch (error) {
+      qaResult.className = 'answer refusal';
+      qaResult.innerHTML = `<strong>本地服务暂时不可用。</strong><div class="helper">${escapeHtml(error.message || 'QUERY_FAILED')}</div>`;
+    } finally {
+      ask.disabled = false;
+      ask.textContent = buttonText;
+    }
+  });
 })();
 </script>
 </body></html>
