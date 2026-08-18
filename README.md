@@ -4,6 +4,8 @@
 
 在线访问：https://yghjnj.github.io/material-desk-demo/
 
+[一键导入 Render 部署公网后端](https://render.com/deploy?repo=https://github.com/yghjnj/material-desk-demo)
+
 - 仅使用项目内虚构演示资料
 - 不连接企业内部资料、CRM 或外部客服平台
 - 页面操作不会发送消息、报价、承诺交期或写入后台
