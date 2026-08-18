@@ -99,6 +99,9 @@
   const qaResult = document.querySelector('#qaResult');
   const evidence = document.querySelector('#evidence');
   let localApi = false;
+  let apiMode = 'static';
+  const apiBase = (window.MATERIAL_DESK_API_BASE || '').replace(/\/$/, '');
+  const apiFetch = (path, options = {}) => fetch(`${apiBase}${path}`, { ...options, credentials: apiBase ? 'include' : (options.credentials || 'same-origin') });
   const escapeHtml = (value) => String(value ?? '').replace(/[&<>"']/g, (character) => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[character]));
   const setMode = (text) => { if (apiStatus && apiStatus.lastChild) apiStatus.lastChild.textContent = text; };
   const reasonText = (reason) => ({
@@ -126,21 +129,22 @@
     if (!qaResult) return;
     if (result.status === 'ANSWERED') {
       qaResult.className = 'answer';
-      qaResult.innerHTML = `<strong>${escapeHtml(result.answer)}</strong><div class="helper">本地 FTS5 检索 · 已返回 ${result.evidence.length} 条可核验证据</div>`;
+      qaResult.innerHTML = `<strong>${escapeHtml(result.answer)}</strong><div class="helper">${apiMode === 'public' ? '公开会话知识库' : '本地 FTS5 检索'} · 已返回 ${result.evidence.length} 条可核验证据</div>`;
     } else {
       qaResult.className = 'answer refusal';
       qaResult.innerHTML = `<strong>无法依据当前已登记资料回答。</strong><div class="helper">${escapeHtml(reasonText(result.reason))} 请补充资料或换一个有证据的问题。</div>`;
     }
     renderEvidence(result.evidence || []);
   };
-  fetch('/api/health', { cache: 'no-store' }).then((response) => {
+  apiFetch('/api/health', { cache: 'no-store' }).then((response) => {
     if (!response.ok) throw new Error('LOCAL_API_UNAVAILABLE');
     return response.json();
   }).then(async (health) => {
-    localApi = health.mode === 'local';
-    setMode(`本地服务 · 已连接 · ${health.documents} 份资料`);
-    if (modeBadge) modeBadge.textContent = '本地资料 · 不连接外部服务';
-    const response = await fetch('/api/documents', { cache: 'no-store' });
+    localApi = health.mode === 'local' || health.mode === 'public';
+    apiMode = health.mode;
+    setMode(health.mode === 'public' ? `公开服务 · 已连接 · 当前会话 ${health.documents} 份资料` : `本地服务 · 已连接 · ${health.documents} 份资料`);
+    if (modeBadge) modeBadge.textContent = health.mode === 'public' ? '公开服务 · 会话隔离' : '本地资料 · 不连接外部服务';
+    const response = await apiFetch('/api/documents', { cache: 'no-store' });
     if (response.ok) {
       const payload = await response.json();
       (payload.documents || []).forEach(addDocumentRow);
@@ -159,7 +163,7 @@
     }
     uploadStatus.textContent = `正在解析并入库：${file.name}`;
     try {
-      const response = await fetch(`/api/documents?filename=${encodeURIComponent(file.name)}`, { method: 'POST', body: file, cache: 'no-store' });
+      const response = await apiFetch(`/api/documents?filename=${encodeURIComponent(file.name)}`, { method: 'POST', body: file, cache: 'no-store' });
       const payload = await response.json();
       if (!response.ok) throw new Error(payload.error || 'INGESTION_FAILED');
       addDocumentRow(payload.document);
@@ -176,7 +180,7 @@
     ask.disabled = true;
     ask.textContent = '检索中…';
     try {
-      const response = await fetch('/api/query', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ question: question.value }), cache: 'no-store' });
+      const response = await apiFetch('/api/query', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ question: question.value }), cache: 'no-store' });
       const payload = await response.json();
       if (!response.ok) throw new Error(payload.error || 'QUERY_FAILED');
       renderQuery(payload);
@@ -200,7 +204,9 @@
   const review = document.querySelector('#review');
   const esc = (value) => String(value ?? '').replace(/[&<>"']/g, (character) => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[character]));
   const labels = { application_scenario: '应用场景', material_or_product: '材料 / 产品', performance_indicators: '性能指标', quantity_and_usage: '数量 / 用量', delivery_and_date: '交期', budget_and_currency: '预算', process: '工艺', test_standards: '测试标准', compliance: '合规要求' };
-  const localService = fetch('/api/health', { cache: 'no-store' }).then((response) => response.ok).catch(() => false);
+  const apiBase = (window.MATERIAL_DESK_API_BASE || '').replace(/\/$/, '');
+  const apiFetch = (path, options = {}) => fetch(`${apiBase}${path}`, { ...options, credentials: apiBase ? 'include' : (options.credentials || 'same-origin') });
+  const localService = apiFetch('/api/health', { cache: 'no-store' }).then((response) => response.ok).catch(() => false);
   const fallbackExtract = (text) => {
     const fields = [];
     const add = (key, value, quote, stateName = 'KNOWN') => fields.push({ key, label: labels[key], value, quote, state: stateName });
@@ -244,7 +250,7 @@
     try {
       let result;
       if (await localService) {
-        const response = await fetch('/api/requirements', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ text }), cache: 'no-store' });
+        const response = await apiFetch('/api/requirements', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ text }), cache: 'no-store' });
         if (!response.ok) throw new Error('REQUIREMENT_API_FAILED');
         result = await response.json();
       } else result = fallbackExtract(text);

@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: material-desk-public
+    runtime: docker
+    plan: free
+    dockerfilePath: ./Dockerfile.public
+    dockerContext: .
+    healthCheckPath: /api/health
+    envVars:
+      - key: PUBLIC_STORAGE
+        value: /tmp/material-desk-public
+      - key: PUBLIC_RETENTION_HOURS
+        value: "24"
+      - key: PUBLIC_SECURE_COOKIE
+        value: "1"
