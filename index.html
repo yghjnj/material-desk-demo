@@ -26,8 +26,8 @@
     <div class="headline"><div><h1>技术支持工作台</h1><p>从企业资料、客户原文到可审核的回复初稿</p></div><div id="modeBadge" class="badge">合成资料 · 不连接外部服务</div></div>
     <div class="tabs"><button class="tab active" data-tab="qa">资料问答</button><button class="tab" data-tab="req">需求抽取</button><button class="tab" data-tab="draft">回复草稿</button></div>
     <div id="qa" class="view active"><div class="grid"><div class="panel"><h2>向技术资料提问</h2><div class="sub">仅检索已登记且有效的资料，回答带可核验出处</div><textarea id="q" class="textarea">FIC-WPU-210 的固含量和推荐储存温度是多少？</textarea><div class="actions"><button class="primary" id="ask">检索并回答</button><span class="helper">证据不足时会拒答</span></div><div id="qaResult" class="answer"><strong>固含量为 35 ± 2%，推荐储存温度为 5–35 °C。</strong><div class="helper">基于 2 条技术事实 · 版本 FIC-WPU-210 v1.0</div></div></div><div class="panel"><h2>当前已登记资料</h2><div class="sub">本地服务会解析并索引上传文件；公开静态站点不会接收文件。</div><div id="sourceList" class="source-list"><div class="source-row"><span><b>FIC-WPU-210 数据表</b><small>PDF · v1.0 · 有效</small></span><span class="pill">已登记</span></div><div class="source-row"><span><b>FIC-WPU-210 储存说明</b><small>DOCX · v1.0 · 有效</small></span><span class="pill">已登记</span></div></div><div class="actions"><label class="secondary file-picker" for="uploadInput">上传并入库</label><input id="uploadInput" type="file" accept=".pdf,.docx,.md,.txt" hidden><span id="uploadStatus" class="helper" role="status" aria-live="polite">支持 PDF、DOCX、MD、TXT</span></div><div class="notice">本地模式：文件会保存到项目内 work/local_kb，解析后建立 FTS5 索引；公开链接仍是静态演示，不会上传文件。</div><h2 class="evidence-title">本次技术证据</h2><div class="sub">查看回答依据的章节和原文片段</div><div id="evidence" class="evidence"><article class="evidence-item"><header><span>fic_wpu_210_datasheet.pdf · v1.0</span><span class="pill">DIRECT</span></header><div>章节 3 · 物性指标 · “<mark>固含量：35 ± 2%</mark>”</div></article><article class="evidence-item"><header><span>fic_wpu_210_datasheet.docx · v1.0</span><span class="pill">EXACT_MATCH</span></header><div>章节 5 · 储存与运输 · “<mark>建议在 5–35 °C 条件下储存</mark>”</div></article></div><div class="footer-note">本地上传资料会显示文件版本、定位和原文片段；演示资料为项目内合成内容。</div></div></div></div>
-    <div id="req" class="view"><div class="grid"><div class="panel"><h2>粘贴客户咨询</h2><div class="sub">保留客户原文，抽取结果标注来源和缺失项</div><textarea id="msg" class="textarea">我们计划将水性聚氨酯用于木器涂层，月用量约 2 吨，希望 9 月交付。需要耐磨和阻燃性能，预算待确认。</textarea><div class="actions"><button class="primary" id="extract">结构化抽取</button><span class="helper">不会猜测原文未提供的字段</span></div></div><div class="panel"><h2>需求摘要</h2><div class="sub">revision 01 · 客户原文可回溯</div><div class="facts"><div class="fact"><label>应用场景</label><b>木器涂层</b></div><div class="fact"><label>材料 / 产品</label><b>水性聚氨酯</b></div><div class="fact"><label>数量</label><b>约 2 t / 月</b></div><div class="fact"><label>交期</label><b>2026-09</b></div><div class="fact"><label>性能指标</label><b>耐磨、阻燃</b></div><div class="fact"><label>预算</label><b>未知</b></div></div><div class="review"><b>待确认</b><br>阻燃等级、测试方法、交付日期和预算区间尚未提供。</div></div></div></div>
-    <div id="draft" class="view"><div class="grid"><div class="panel"><h2>证据型回复初稿</h2><div class="sub">事实、假设和未知分离；发送前必须人工审核</div><div class="draft" id="draftText">您好，感谢您咨询木器涂层用水性聚氨酯。根据 FIC-WPU-210 v1.0 技术资料，产品固含量为 35 ± 2%，建议在 5–35 °C 条件下储存。<br><br>关于耐磨和阻燃性能，当前资料未提供与您测试方法对应的完整数据，因此暂不作适配或等级承诺。为便于评估，请确认阻燃等级/测试标准、目标耐磨指标、预计交付日期和预算区间。</div><div class="actions"><button class="primary" id="review">标记为待审核</button><button class="secondary" id="copy">复制草稿</button></div><div id="reviewStatus" class="review-status" role="status" aria-live="polite">当前状态：尚未提交审核。点击按钮后只更新本页演示状态，不会发送或保存到后台。</div><div id="copyStatus" class="helper" role="status" aria-live="polite"></div></div><div class="panel"><h2>审核状态</h2><div class="sub">草稿 hash: demo-7e31 · revision 01</div><div class="review"><b>REQUIRES_HUMAN_REVIEW</b><br>系统不会自动发送、报价、承诺交期或写入 CRM。</div><h3 class="evidence-title">技术事实（可以引用的证据）</h3><div class="evidence"><article class="evidence-item fact-item"><header><span>FACT · 技术资料</span><span class="pill">已绑定</span></header><div>固含量 35 ± 2% · PDF p.3 / DOCX §5</div></article></div><h3 class="evidence-title">未知 / 待确认（不能直接承诺）</h3><div class="evidence"><article class="evidence-item unknown-item"><header><span>UNKNOWN · 客户待补</span><span class="pill warn">待确认</span></header><div>阻燃等级、测试标准、预算和交付日</div></article></div></div></div></div>
+    <div id="req" class="view"><div class="grid"><div class="panel"><h2>第 2 步：粘贴客户咨询</h2><div class="sub">保留客户原文，点击抽取后才会生成结构化需求</div><textarea id="msg" class="textarea">我们计划将水性聚氨酯用于木器涂层，月用量约 2 吨，希望 9 月交付。需要耐磨和阻燃性能，预算待确认。</textarea><div class="actions"><button class="primary" id="extract">结构化抽取</button><button class="secondary" id="goDraft" disabled>下一步：生成回复草稿</button></div><div id="reqStatus" class="helper" role="status" aria-live="polite">尚未抽取。粘贴客户原话后点击“结构化抽取”。</div></div><div class="panel"><h2>需求摘要</h2><div id="reqRevision" class="sub">等待第 2 步 · 客户原文可回溯</div><div id="reqFacts" class="facts"><div class="fact"><label>应用场景</label><b>尚未抽取</b></div><div class="fact"><label>材料 / 产品</label><b>尚未抽取</b></div><div class="fact"><label>数量 / 用量</label><b>尚未抽取</b></div><div class="fact"><label>交期</label><b>尚未抽取</b></div><div class="fact"><label>性能指标</label><b>尚未抽取</b></div><div class="fact"><label>预算</label><b>尚未抽取</b></div></div><div id="reqReview" class="review"><b>待确认</b><br>完成抽取后，这里会列出缺失字段、风险和原文定位。</div></div></div></div>
+    <div id="draft" class="view"><div class="grid"><div class="panel"><h2>第 3 步：证据型回复初稿</h2><div class="sub">把第 1 步技术证据和第 2 步需求合并；发送前必须人工审核</div><div id="draftContext" class="notice">请先完成资料问答和客户需求抽取，再生成回复初稿。</div><div class="actions"><button class="primary" id="generateDraft">生成回复草稿</button><button class="secondary" id="review" disabled>标记为待审核</button><button class="secondary" id="copy">复制草稿</button></div><div class="draft" id="draftText">尚未生成草稿。</div><div id="reviewStatus" class="review-status" role="status" aria-live="polite">当前状态：尚未生成。完成前两步后点击“生成回复草稿”。</div><div id="copyStatus" class="helper" role="status" aria-live="polite"></div></div><div class="panel"><h2>审核内容</h2><div id="draftRevision" class="sub">等待第 3 步 · 未绑定输入</div><div class="review"><b>REQUIRES_HUMAN_REVIEW</b><br>系统不会自动发送、报价、承诺交期或写入 CRM。</div><h3 class="evidence-title">技术事实（可以引用的证据）</h3><div id="technicalFacts" class="evidence"><div class="empty">生成草稿后显示第 1 步证据。</div></div><h3 class="evidence-title">未知 / 待确认（不能直接承诺）</h3><div id="unknowns" class="evidence"><div class="empty">生成草稿后显示第 2 步缺失项。</div></div></div></div></div>
     <div class="footer-note">当前页面是本地演示入口，使用项目内虚构资料；完整 C-H API、SQLite 编排、正式评测与生产部署尚未宣称完成。</div>
   </section></main>
 </div>
@@ -188,6 +188,110 @@
       ask.textContent = buttonText;
     }
   });
+})();
+</script>
+<script>
+(() => {
+  const state = { qa: null, requirements: null };
+  const extract = document.querySelector('#extract');
+  const message = document.querySelector('#msg');
+  const goDraft = document.querySelector('#goDraft');
+  const generateDraft = document.querySelector('#generateDraft');
+  const review = document.querySelector('#review');
+  const esc = (value) => String(value ?? '').replace(/[&<>"']/g, (character) => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[character]));
+  const labels = { application_scenario: '应用场景', material_or_product: '材料 / 产品', performance_indicators: '性能指标', quantity_and_usage: '数量 / 用量', delivery_and_date: '交期', budget_and_currency: '预算', process: '工艺', test_standards: '测试标准', compliance: '合规要求' };
+  const localService = fetch('/api/health', { cache: 'no-store' }).then((response) => response.ok).catch(() => false);
+  const fallbackExtract = (text) => {
+    const fields = [];
+    const add = (key, value, quote, stateName = 'KNOWN') => fields.push({ key, label: labels[key], value, quote, state: stateName });
+    const match = (pattern, key) => { const hit = text.match(pattern); if (hit) add(key, hit[1].trim(), hit[0]); };
+    match(/(?:用于|应用于|应用场景(?:是|为)?)[\s:：]*([^,，。；;\n]+)/, 'application_scenario');
+    match(/(?:将|材料(?:是|为)?|产品(?:是|为)?)[\s:：]*([^,，。；;\n]+?)(?=用于|应用于|，|,|。|；|;|$)/, 'material_or_product');
+    match(/(?:月用量|数量|用量)[^\d]{0,8}(\d+(?:\.\d+)?\s*(?:吨|t|kg|g|L|mL))/, 'quantity_and_usage');
+    match(/(?:希望|交期|交付|交货)[^\d]{0,10}((?:\d{4}[-/.年])?\d{1,2}\s*月(?:\s*\d{1,2}\s*日)?|\d{4}[-/]\d{1,2}(?:[-/]\d{1,2})?)/, 'delivery_and_date');
+    const budget = text.match(/预算[\s:：]*(待确认|未知|未定)/); if (budget) add('budget_and_currency', budget[1], budget[0], 'UNKNOWN');
+    const performance = ['耐磨', '阻燃', '耐水', '耐候', '附着力', '硬度'].filter((term) => text.includes(term));
+    if (performance.length) add('performance_indicators', performance.join('、'), performance.join('、'));
+    const known = new Set(fields.map((field) => field.key));
+    Object.keys(labels).forEach((key) => { if (!known.has(key)) add(key, '未知', '', 'MISSING'); });
+    const missing = fields.filter((field) => field.state === 'MISSING').map((field) => field.label);
+    const risks = [];
+    if (known.has('performance_indicators') && !known.has('test_standards')) risks.push('性能指标缺少测试标准，不能直接承诺等级或达标。');
+    if (fields.some((field) => field.key === 'budget_and_currency' && field.state === 'UNKNOWN')) risks.push('预算仍待客户确认。');
+    return { revision: 1, status: missing.length || risks.length ? 'NEEDS_CONFIRMATION' : 'COMPLETE', fields, missing, risks, source_text: text };
+  };
+  const renderRequirements = (result) => {
+    state.requirements = result;
+    const facts = document.querySelector('#reqFacts');
+    if (facts) facts.innerHTML = result.fields.map((field) => `<div class="fact"><label>${esc(field.label)}</label><b class="${field.state === 'MISSING' || field.state === 'UNKNOWN' ? 'muted-value' : ''}">${esc(field.value)}</b></div>`).join('');
+    const reviewBox = document.querySelector('#reqReview');
+    const missing = result.missing?.length ? `缺失字段：${result.missing.join('、')}。` : '必填字段已基本齐全。';
+    const risks = result.risks?.length ? `<br>风险：${result.risks.map(esc).join('；')}` : '';
+    const quotes = result.fields.filter((field) => field.quote).slice(0, 5).map((field) => `${esc(field.label)}：“${esc(field.quote)}”`).join('<br>');
+    if (reviewBox) reviewBox.innerHTML = `<b>${result.status === 'COMPLETE' ? '可以进入草稿' : '待确认'}</b><br>${esc(missing)}${risks}<br><small>原文定位：<br>${quotes || '没有匹配到可定位字段。'}</small>`;
+    const status = document.querySelector('#reqStatus');
+    if (status) status.textContent = `已完成 revision ${result.revision} 抽取：${result.fields.filter((field) => field.state !== 'MISSING').length} 个已识别字段，${result.missing.length} 个缺失字段。`;
+    const revision = document.querySelector('#reqRevision');
+    if (revision) revision.textContent = `revision ${result.revision} · 状态 ${result.status} · 客户原文可回溯`;
+    if (goDraft) goDraft.disabled = false;
+  };
+  extract?.addEventListener('click', async (event) => {
+    const button = event.currentTarget;
+    const text = message?.value?.trim() || '';
+    if (!text) { document.querySelector('#reqStatus').textContent = '请先粘贴客户咨询原文。'; return; }
+    button.disabled = true;
+    document.querySelector('#reqStatus').textContent = '正在抽取客户需求…';
+    try {
+      let result;
+      if (await localService) {
+        const response = await fetch('/api/requirements', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ text }), cache: 'no-store' });
+        if (!response.ok) throw new Error('REQUIREMENT_API_FAILED');
+        result = await response.json();
+      } else result = fallbackExtract(text);
+      renderRequirements(result);
+      button.textContent = '重新抽取';
+    } catch (error) {
+      document.querySelector('#reqStatus').textContent = `抽取失败：${error.message || 'REQUIREMENT_FAILED'}`;
+    } finally { button.disabled = false; }
+  });
+  message?.addEventListener('input', () => {
+    if (state.requirements) {
+      state.requirements = null;
+      if (goDraft) goDraft.disabled = true;
+      const status = document.querySelector('#reqStatus');
+      if (status) status.textContent = '客户原文已变化，请重新点击“结构化抽取”。';
+    }
+  });
+  const captureQA = () => {
+    const result = document.querySelector('#qaResult')?.innerText || '';
+    const evidence = [...document.querySelectorAll('#evidence .evidence-item')].map((item) => item.innerText);
+    if (result && !result.includes('无法依据') && !result.includes('暂时不可用')) state.qa = { answer: result.split('\n')[0], evidence };
+    else state.qa = null;
+  };
+  document.querySelector('#ask')?.addEventListener('click', () => setTimeout(captureQA, 1200));
+  const generate = () => {
+    const context = document.querySelector('#draftContext');
+    if (!state.qa || !state.requirements) {
+      if (context) context.textContent = '还不能生成：请先在第 1 步完成技术问答，再在第 2 步完成客户需求抽取。';
+      return;
+    }
+    const known = state.requirements.fields.filter((field) => field.state === 'KNOWN').map((field) => `${field.label}：${field.value}`).join('；');
+    const unknown = [...state.requirements.missing, ...state.requirements.risks];
+    const text = `您好，感谢您的咨询。\n\n技术事实：${state.qa.answer}\n\n客户需求：${known || '尚未识别到明确字段。'}\n\n待确认：${unknown.length ? unknown.join('；') : '暂无，但仍需人工核对技术证据。'}\n\n以上内容仅作为回复初稿，请人工核对引用、适配性、测试标准和交期后再发送。`;
+    document.querySelector('#draftText').textContent = text;
+    if (context) context.textContent = `已绑定第 1 步的 ${state.qa.evidence.length} 条技术证据和第 2 步 revision ${state.requirements.revision} 需求。`;
+    const revision = document.querySelector('#draftRevision');
+    if (revision) revision.textContent = `revision ${state.requirements.revision} · 已绑定技术证据与客户原文`;
+    const facts = document.querySelector('#technicalFacts');
+    if (facts) facts.innerHTML = state.qa.evidence.length ? state.qa.evidence.map((item) => `<article class="evidence-item fact-item"><header><span>FACT · 技术资料</span><span class="pill">已绑定</span></header><div>${esc(item)}</div></article>`).join('') : '<div class="empty">没有可绑定的技术证据。</div>';
+    const unknowns = document.querySelector('#unknowns');
+    if (unknowns) unknowns.innerHTML = unknown.length ? unknown.map((item) => `<article class="evidence-item unknown-item"><header><span>UNKNOWN · 待确认</span><span class="pill warn">需人工确认</span></header><div>${esc(item)}</div></article>`).join('') : '<div class="empty">暂无待确认项，但仍需人工审核。</div>';
+    document.querySelector('#reviewStatus').textContent = '当前状态：草稿已生成，等待人工审核。';
+    if (review) review.disabled = false;
+  };
+  generateDraft?.addEventListener('click', () => { captureQA(); generate(); });
+  goDraft?.addEventListener('click', () => { captureQA(); document.querySelector('.tab[data-tab="draft"]')?.click(); generate(); });
+  review?.addEventListener('click', () => { if (!review.disabled) document.querySelector('#reviewStatus').textContent = '当前状态：REQUIRES_HUMAN_REVIEW（已提交本页演示状态）。请人工核对后再发送。'; });
 })();
 </script>
 </body></html>
