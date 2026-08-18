@@ -5,9 +5,10 @@ COPY . .
 RUN pip install --no-cache-dir .
 
 ENV HOST=0.0.0.0
+ENV PORT=8000
 ENV PUBLIC_STORAGE=/tmp/material-desk-public
 ENV PUBLIC_RETENTION_HOURS=24
 ENV PUBLIC_SECURE_COOKIE=1
 
 EXPOSE 8000
-CMD ["python", "demo/public_server.py", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["sh", "-c", "python demo/public_server.py --host 0.0.0.0 --port ${PORT:-8000}"]
