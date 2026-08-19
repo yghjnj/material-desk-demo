@@ -2,6 +2,7 @@ FROM python:3.14-slim
 
 WORKDIR /app
 COPY . .
+RUN cp index.html demo/index.html
 RUN pip install --no-cache-dir .
 
 ENV HOST=0.0.0.0
