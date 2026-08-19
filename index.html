@@ -22,29 +22,25 @@
 <body>
 <div class="shell">
   <aside class="rail"><div class="brand"><div class="mark">M</div><div><strong>Material Desk</strong><span>工业材料技术支持</span></div></div><nav class="nav"><button class="active" data-tab="qa">技术问答</button><button data-tab="req">客户需求</button><button data-tab="draft">回复初稿</button></nav><div class="rail-foot">演示空间 · Fictional demo corpus<br>所有输出需人工审核</div></aside>
-  <main class="main"><header class="top"><div class="crumb">工作台 / <b id="crumb">技术问答</b></div><div class="status"><i class="dot"></i>本地演示模式</div></header><section class="content">
-    <div class="headline"><div><h1>技术支持工作台</h1><p>从企业资料、客户原文到可审核的回复初稿</p></div><div id="modeBadge" class="badge">合成资料 · 不连接外部服务</div></div>
+  <main class="main"><header class="top"><div class="crumb">工作台 / <b id="crumb">技术问答</b></div><div class="status"><i class="dot"></i>正在连接服务</div></header><section class="content">
+    <div class="headline"><div><h1>技术支持工作台</h1><p>从企业资料、客户原文到可审核的回复初稿</p></div><div id="modeBadge" class="badge">正在连接资料服务</div></div>
     <div class="tabs"><button class="tab active" data-tab="qa">资料问答</button><button class="tab" data-tab="req">需求抽取</button><button class="tab" data-tab="draft">回复草稿</button></div>
-    <div id="qa" class="view active"><div class="grid"><div class="panel"><h2>向技术资料提问</h2><div class="sub">仅检索已登记且有效的资料，回答带可核验出处</div><textarea id="q" class="textarea">FIC-WPU-210 的固含量和推荐储存温度是多少？</textarea><div class="actions"><button class="primary" id="ask">检索并回答</button><span class="helper">证据不足时会拒答</span></div><div id="qaResult" class="answer"><strong>固含量为 35 ± 2%，推荐储存温度为 5–35 °C。</strong><div class="helper">基于 2 条技术事实 · 版本 FIC-WPU-210 v1.0</div></div></div><div class="panel"><h2>当前已登记资料</h2><div class="sub">本地服务会解析并索引上传文件；公开静态站点不会接收文件。</div><div id="sourceList" class="source-list"><div class="source-row"><span><b>FIC-WPU-210 数据表</b><small>PDF · v1.0 · 有效</small></span><span class="pill">已登记</span></div><div class="source-row"><span><b>FIC-WPU-210 储存说明</b><small>DOCX · v1.0 · 有效</small></span><span class="pill">已登记</span></div></div><div class="actions"><label class="secondary file-picker" for="uploadInput">上传并入库</label><input id="uploadInput" type="file" accept=".pdf,.docx,.md,.txt" hidden><span id="uploadStatus" class="helper" role="status" aria-live="polite">支持 PDF、DOCX、MD、TXT</span></div><div class="notice">本地模式：文件会保存到项目内 work/local_kb，解析后建立 FTS5 索引；公开链接仍是静态演示，不会上传文件。</div><h2 class="evidence-title">本次技术证据</h2><div class="sub">查看回答依据的章节和原文片段</div><div id="evidence" class="evidence"><article class="evidence-item"><header><span>fic_wpu_210_datasheet.pdf · v1.0</span><span class="pill">DIRECT</span></header><div>章节 3 · 物性指标 · “<mark>固含量：35 ± 2%</mark>”</div></article><article class="evidence-item"><header><span>fic_wpu_210_datasheet.docx · v1.0</span><span class="pill">EXACT_MATCH</span></header><div>章节 5 · 储存与运输 · “<mark>建议在 5–35 °C 条件下储存</mark>”</div></article></div><div class="footer-note">本地上传资料会显示文件版本、定位和原文片段；演示资料为项目内合成内容。</div></div></div></div>
+    <div id="qa" class="view active"><div class="grid"><div class="panel"><h2>向技术资料提问</h2><div class="sub">仅检索已登记且有效的资料，回答带可核验出处</div><textarea id="q" class="textarea" placeholder="先上传资料，再输入要核查的问题"></textarea><div class="actions"><button class="primary" id="ask">检索并回答</button><span class="helper">证据不足时会拒答</span></div><div id="qaResult" class="answer"><strong>尚未检索。</strong><div class="helper">上传资料后输入问题，系统只依据当前会话中的资料回答。</div></div></div><div class="panel"><h2>当前已登记资料</h2><div class="sub">服务会解析并索引上传文件；每个访问者的资料相互隔离。</div><div id="sourceList" class="source-list"><div id="sourceEmpty" class="empty">当前会话还没有资料，请上传 PDF、DOCX、MD 或 TXT。</div></div><div class="actions"><label class="secondary file-picker" for="uploadInput">上传并入库</label><input id="uploadInput" type="file" accept=".pdf,.docx,.md,.txt" hidden><span id="uploadStatus" class="helper" role="status" aria-live="polite">支持 PDF、DOCX、MD、TXT</span></div><div class="notice">公开演示服务：上传内容仅供当前浏览器会话使用，与其他访问者隔离；免费服务会在约 24 小时内清理临时资料。</div><h2 class="evidence-title">本次技术证据</h2><div class="sub">查看回答依据的章节和原文片段</div><div id="evidence" class="evidence"><div class="empty">完成检索后，这里会显示文件名、版本、位置和原文片段。</div></div><div class="footer-note">上传成功后，资料会显示文件版本、定位和原文片段。</div></div></div></div>
     <div id="req" class="view"><div class="grid"><div class="panel"><h2>第 2 步：粘贴客户咨询</h2><div class="sub">保留客户原文，点击抽取后才会生成结构化需求</div><textarea id="msg" class="textarea">我们计划将水性聚氨酯用于木器涂层，月用量约 2 吨，希望 9 月交付。需要耐磨和阻燃性能，预算待确认。</textarea><div class="actions"><button class="primary" id="extract">结构化抽取</button><button class="secondary" id="goDraft" disabled>下一步：生成回复草稿</button></div><div id="reqStatus" class="helper" role="status" aria-live="polite">尚未抽取。粘贴客户原话后点击“结构化抽取”。</div></div><div class="panel"><h2>需求摘要</h2><div id="reqRevision" class="sub">等待第 2 步 · 客户原文可回溯</div><div id="reqFacts" class="facts"><div class="fact"><label>应用场景</label><b>尚未抽取</b></div><div class="fact"><label>材料 / 产品</label><b>尚未抽取</b></div><div class="fact"><label>数量 / 用量</label><b>尚未抽取</b></div><div class="fact"><label>交期</label><b>尚未抽取</b></div><div class="fact"><label>性能指标</label><b>尚未抽取</b></div><div class="fact"><label>预算</label><b>尚未抽取</b></div></div><div id="reqReview" class="review"><b>待确认</b><br>完成抽取后，这里会列出缺失字段、风险和原文定位。</div></div></div></div>
     <div id="draft" class="view"><div class="grid"><div class="panel"><h2>第 3 步：证据型回复初稿</h2><div class="sub">把第 1 步技术证据和第 2 步需求合并；发送前必须人工审核</div><div id="draftContext" class="notice">请先完成资料问答和客户需求抽取，再生成回复初稿。</div><div class="actions"><button class="primary" id="generateDraft">生成回复草稿</button><button class="secondary" id="review" disabled>标记为待审核</button><button class="secondary" id="copy">复制草稿</button></div><div class="draft" id="draftText">尚未生成草稿。</div><div id="reviewStatus" class="review-status" role="status" aria-live="polite">当前状态：尚未生成。完成前两步后点击“生成回复草稿”。</div><div id="copyStatus" class="helper" role="status" aria-live="polite"></div></div><div class="panel"><h2>审核内容</h2><div id="draftRevision" class="sub">等待第 3 步 · 未绑定输入</div><div class="review"><b>REQUIRES_HUMAN_REVIEW</b><br>系统不会自动发送、报价、承诺交期或写入 CRM。</div><h3 class="evidence-title">技术事实（可以引用的证据）</h3><div id="technicalFacts" class="evidence"><div class="empty">生成草稿后显示第 1 步证据。</div></div><h3 class="evidence-title">未知 / 待确认（不能直接承诺）</h3><div id="unknowns" class="evidence"><div class="empty">生成草稿后显示第 2 步缺失项。</div></div></div></div></div>
-    <div class="footer-note">当前页面是本地演示入口，使用项目内虚构资料；完整 C-H API、SQLite 编排、正式评测与生产部署尚未宣称完成。</div>
+    <div class="footer-note">当前页面连接公开演示服务；上传资料按浏览器会话隔离，所有回复都需要人工审核后使用。</div>
   </section></main>
 </div>
 <script>
   const allTabs=[...document.querySelectorAll('[data-tab]')]; const views=[...document.querySelectorAll('.view')]; const crumb=document.querySelector('#crumb'); const labels={qa:'技术问答',req:'客户需求',draft:'回复初稿'};
   function show(name){allTabs.forEach(x=>x.classList.toggle('active',x.dataset.tab===name));views.forEach(x=>x.classList.toggle('active',x.id===name));crumb.textContent=labels[name]}
   allTabs.forEach(x=>x.addEventListener('click',()=>show(x.dataset.tab)));
-  document.querySelector('#ask').addEventListener('click',()=>{document.querySelector('#qaResult').innerHTML='<strong>已从有效资料检索到 2 条直接证据。</strong><div class="helper">回答保留版本、章节和原文定位，请核对右侧证据后使用。</div>'});
-  document.querySelector('#extract').addEventListener('click',event=>{const button=event.currentTarget;button.textContent='已抽取 revision 01';button.disabled=true});
-  document.querySelector('#uploadInput').addEventListener('change',e=>{const file=e.target.files?.[0];if(file) document.querySelector('#uploadStatus').textContent=`已选择：${file.name}（仅演示，尚未入库）`});
-  document.querySelector('#review').addEventListener('click',event=>{const button=event.currentTarget;button.textContent='已标记 · 待人工审核';button.disabled=true;document.querySelector('#reviewStatus').textContent='当前状态：REQUIRES_HUMAN_REVIEW（已提交本页演示状态）。下一步：由人工核对右侧技术事实和待确认项。'});
   document.querySelector('#copy').addEventListener('click',()=>{const status=document.querySelector('#copyStatus');const text=document.querySelector('#draftText').innerText; if(navigator.clipboard){navigator.clipboard.writeText(text).then(()=>status.textContent='草稿已复制到剪贴板。').catch(()=>status.textContent='浏览器未允许复制，请手动选中草稿。')}else{status.textContent='当前浏览器不支持自动复制，请手动选中草稿。'}});
 </script>
 <script>
 (() => {
   const status = document.querySelector('.status');
-  if (status && status.lastChild) status.lastChild.textContent = '公开演示模式';
+  if (status && status.lastChild) status.lastChild.textContent = '正在连接服务';
   const descriptions = { qa: '输入：已登记且有效的技术资料 · 输出：带版本和出处的回答', req: '输入：客户咨询原文 · 输出：结构化字段、缺失项和风险', draft: '输入：技术证据 + 需求抽取 · 输出：待人工审核的回复初稿' };
   Object.entries(descriptions).forEach(([id, text]) => { const sub = document.querySelector(`#${id} .sub`); if (sub) sub.textContent = text; });
   const tabs = document.querySelector('.tabs');
@@ -56,7 +52,7 @@
     tabs.before(flow);
     const note = document.createElement('p');
     note.className = 'flow-note';
-    note.textContent = '使用顺序：先查技术事实，再整理客户需求，最后生成待审核回复。当前公开页的资料为演示数据。';
+    note.textContent = '使用顺序：先上传资料并核查技术事实，再整理客户需求，最后生成待人工审核的回复。';
     flow.after(note);
     flow.addEventListener('click', (event) => {
       const button = event.target.closest('[data-tab]');
@@ -66,25 +62,6 @@
       flow.querySelectorAll('.flow-step').forEach((item) => item.classList.toggle('active', item === button));
     });
   }
-  const qaResult = document.querySelector('#qaResult');
-  const evidence = document.querySelector('#evidence');
-  const defaultEvidence = evidence ? evidence.innerHTML : '';
-  document.querySelector('#ask')?.addEventListener('click', () => {
-    const query = (document.querySelector('#q')?.value || '').trim();
-    const supported = /FIC-WPU-210/i.test(query) && /(固含量|储存|温度|物性)/.test(query);
-    if (supported) {
-      qaResult.className = 'answer';
-      qaResult.innerHTML = '<strong>固含量为 35 ± 2%，推荐储存温度为 5–35 °C。</strong><div class="helper">基于 2 条技术事实 · 版本 FIC-WPU-210 v1.0</div>';
-      if (evidence) evidence.innerHTML = defaultEvidence;
-    } else {
-      const selected = (document.querySelector('#uploadStatus')?.textContent || '').startsWith('已选择');
-      qaResult.className = 'answer refusal';
-      qaResult.innerHTML = `<strong>无法依据当前已登记资料回答。</strong><div class="helper">${selected ? '你选择的文件目前只显示文件名，尚未解析或入库。' : '当前演示知识库仅登记 FIC-WPU-210 资料。'} 请先完成真实资料入库，或换一个有对应技术证据的问题。</div>`;
-      if (evidence) evidence.innerHTML = '<div class="empty">未找到可支持本问题的证据，系统拒答。</div>';
-    }
-  });
-  document.querySelector('#extract')?.addEventListener('click', (event) => { const button = event.currentTarget; button.textContent = '已抽取 revision 01'; button.disabled = true; });
-  document.querySelector('#review')?.addEventListener('click', (event) => { const button = event.currentTarget; button.textContent = '已标记 · 待人工审核'; button.disabled = true; const state = document.querySelector('#reviewStatus'); if (state) state.textContent = '当前状态：REQUIRES_HUMAN_REVIEW（已提交本页演示状态）。下一步：由人工核对右侧技术事实和待确认项。'; });
 })();
 </script>
 <script>
@@ -111,11 +88,15 @@
   }[reason] || '当前已入库资料无法支持这个问题。');
   const addDocumentRow = (item) => {
     if (!sourceList || sourceList.querySelector(`[data-source-hash="${item.source_sha256}"]`)) return;
+    sourceList.querySelector('#sourceEmpty')?.remove();
     const row = window.document.createElement('div');
     row.className = 'source-row';
     row.dataset.sourceHash = item.source_sha256;
     row.innerHTML = `<span><b>${escapeHtml(item.filename)}</b><small>${escapeHtml(item.document_format)} · ${escapeHtml(item.version_label)} · ${item.block_count} 个片段</small></span><span class="pill">已入库</span>`;
     sourceList.appendChild(row);
+    const count = sourceList.querySelectorAll('[data-source-hash]').length;
+    if (apiMode === 'public') setMode(`公开服务 · 已连接 · 当前会话 ${count} 份资料`);
+    if (apiMode === 'local') setMode(`本地服务 · 已连接 · ${count} 份资料`);
   };
   const renderEvidence = (items) => {
     if (!evidence) return;
@@ -136,24 +117,32 @@
     }
     renderEvidence(result.evidence || []);
   };
-  apiFetch('/api/health', { cache: 'no-store' }).then((response) => {
-    if (!response.ok) throw new Error('LOCAL_API_UNAVAILABLE');
-    return response.json();
-  }).then(async (health) => {
-    localApi = health.mode === 'local' || health.mode === 'public';
-    apiMode = health.mode;
-    setMode(health.mode === 'public' ? `公开服务 · 已连接 · 当前会话 ${health.documents} 份资料` : `本地服务 · 已连接 · ${health.documents} 份资料`);
-    if (modeBadge) modeBadge.textContent = health.mode === 'public' ? '公开服务 · 会话隔离' : '本地资料 · 不连接外部服务';
-    const response = await apiFetch('/api/documents', { cache: 'no-store' });
-    if (response.ok) {
+  const connectService = async () => {
+    try {
+      const response = await apiFetch('/api/health', { cache: 'no-store' });
+      if (!response.ok) throw new Error(`HEALTH_${response.status}`);
+      const health = await response.json();
+      localApi = health.mode === 'local' || health.mode === 'public';
+      apiMode = health.mode;
+      setMode(health.mode === 'public' ? `公开服务 · 已连接 · 当前会话 ${health.documents} 份资料` : `本地服务 · 已连接 · ${health.documents} 份资料`);
+      if (modeBadge) modeBadge.textContent = health.mode === 'public' ? '公开服务 · 会话隔离' : '本地资料 · 不连接外部服务';
+    } catch (error) {
+      localApi = false;
+      setMode('演示页面 · 服务暂不可用');
+      if (modeBadge) modeBadge.textContent = '资料服务未连接';
+      if (uploadStatus) uploadStatus.textContent = `服务连接失败：${error.message || 'NETWORK_ERROR'}，请稍后刷新。`;
+      return;
+    }
+    try {
+      const response = await apiFetch('/api/documents', { cache: 'no-store' });
+      if (!response.ok) throw new Error(`DOCUMENTS_${response.status}`);
       const payload = await response.json();
       (payload.documents || []).forEach(addDocumentRow);
+    } catch (error) {
+      if (uploadStatus) uploadStatus.textContent = `资料列表暂时无法加载：${error.message || 'NETWORK_ERROR'}。上传功能仍可继续尝试。`;
     }
-  }).catch(() => {
-    localApi = false;
-    setMode('公开静态演示 · 未连接本地服务');
-    if (modeBadge) modeBadge.textContent = '合成资料 · 静态演示';
-  });
+  };
+  connectService();
   upload?.addEventListener('change', async (event) => {
     const file = event.target.files?.[0];
     if (!file) return;
@@ -176,6 +165,11 @@
   });
   ask?.addEventListener('click', async () => {
     if (!localApi) return;
+    if (!question.value.trim()) {
+      qaResult.className = 'answer refusal';
+      qaResult.innerHTML = '<strong>请先输入问题。</strong><div class="helper">系统只会从当前会话已上传的资料中检索答案。</div>';
+      return;
+    }
     const buttonText = ask.textContent;
     ask.disabled = true;
     ask.textContent = '检索中…';
